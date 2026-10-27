@@ -1,0 +1,21 @@
+name = "ig-autodm"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# `npx wrangler kv namespace create IG_KV` çıktısındaki id'yi buraya yaz
+[[kv_namespaces]]
+binding = "IG_KV"
+id = "36d0dbbac9eb4d5e89198a6f78ce532d"
+
+[vars]
+GRAPH_VERSION = "v23.0"
+
+# Gizli değerler (wrangler secret put ile):
+#   IG_ACCESS_TOKEN  - Instagram user access token (uzun ömürlü)
+#   IG_APP_SECRET    - Meta App > Instagram > API setup: Instagram app secret
+#   VERIFY_TOKEN     - webhook doğrulaması için kendi uydurduğun rastgele string
+#   ADMIN_TOKEN      - /admin sayfasının şifresi
+
+# Her pazartesi 03:00 UTC'de Instagram token'ını yenile
+[triggers]
+crons = ["0 3 * * 1"]
